@@ -32,9 +32,22 @@ Hint: be greedy. What does your algorithm do in the case $S=\{1,2,4,8,...\}$.
 
 \textbf{From circuits to NAESAT} Find a direct reduction from CIRCUIT SAT to NAE-3-SAT.
 Hint: consider the 3-SAT clause $(\bar{x}_{1} \vee \bar{x}_{2} \vee \bar{y})$ in our description
-of an AND gate. Does it ever happen that all three literals are ture?
+of an AND gate. Does it ever happen that all three literals are true?
 
+\vspace{6pt}
 
+\textbf{Easy majority?} Consider MAJORITY-OF-3SAT, in which each clause contains
+three literals and at least two of them must be true for it to be satisfied. Either
+show that this problem is in P by reducing it to 2-SAT, or show that it is NP-complete
+by reducing 3-SAT to it.
+
+\subsection{P=NP?}
+\textbf{This far and no farther} Consider the version of INDEPENDENT SET given at
+end of section 4.2.4:
+\begin{center}
+    \fbox{\shortstack[l]{INDEPENDENT SET (exact version) \\ Input: A graph $G=(V,E)$
+    and an integer $k$ \\ Question: Does $G$'s largest independent set have size $k$?}}
+\end{center}
 
 
 \end{document}
