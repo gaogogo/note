@@ -1,0 +1,145 @@
+\documentclass[a4paper,UTF8]{article}
+\usepackage{ctex}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\begin{document}
+\section*{问题求解作业}
+\subsection{从P到NP}
+\textbf{1 Ask the oracle} Suppose that we have access to an oracle, as in Promble 1.10,
+who can answer thedecision problem SAT. show that, by asking her a polynomial
+number of questions,we can find a satisfying assignment if one exists. Hint:
+first describe how setting a variable gives a smaller SAT formula on the remaining
+variable. Show that this is ture of SUBSET SUM as well. This property is called
+self-reducibility, and we will meet it again in chapter 9 and 13.
+
+ \vspace{6pt}
+
+\textbf{2 Same-sum subset} Suppose that $S$ is a list of 10 distinct integers, each
+ranging from 0 to 100. Show that there are two distinct, disjoint, sublist $A,B\subset S$
+with the same total. (Note that, unlike in INTEGER PARTITIONING, we don't demand that $A\cup B = S$).
+That doesn't make it easy to find one!
+
+ \vspace{6pt}
+
+\textbf{3 When greed works} A sequence $a_{1},...,a_{n}$ of integers is called superincreasing
+if each element $a_{i}$ is strictly greater than the sum of all previous elements.
+Show that SUBSET SUM can be solved in polynomial time if $S$ is superincreasing.
+Hint: be greedy. What does your algorithm do in the case $S=\{1,2,4,8,...\}$.
+
+\vspace{6pt}
+
+\textbf{4 From circuits to NAESAT} Find a direct reduction from CIRCUIT SAT to NAE-3-SAT.
+Hint: consider the 3-SAT clause $(\bar{x}_{1} \vee \bar{x}_{2} \vee \bar{y})$ in our description
+of an AND gate. Does it ever happen that all three literals are true?
+
+\vspace{6pt}
+
+\textbf{5 Easy majority?} Consider MAJORITY-OF-3SAT, in which each clause contains
+three literals and at least two of them must be true for it to be satisfied. Either
+show that this problem is in P by reducing it to 2-SAT, or show that it is NP-complete
+by reducing 3-SAT to it.
+
+\subsection{P=NP?}
+\textbf{1 This far and no farther} Consider the version of INDEPENDENT SET given at
+end of section 4.2.4:
+\begin{center}
+    \fbox{\shortstack[l]{INDEPENDENT SET (exact version) \\ Input: A graph $G=(V,E)$
+    and an integer $k$ \\ Question: Does $G$'s largest independent set have size $k$?}}
+\end{center}
+Or similarly, the problem CHROMATIC NUMBER from Problem 4.22:
+\begin{center}
+    \fbox{\shortstack[l]{CHROMATIC NUMBER \\ Input: A graph $G$
+    and an integer $k$ \\ Question: Is $k$ the smallest integer such that $G$ is $k$-colorable?}}
+\end{center}
+show that for both these problems, the property $A(x)$ that $x$ is a yes-instance can be expressed
+as follows, where $B$ and $C$ are in P:
+$$ A(x) = (\exists y : B(x, y)) \wedge (\forall z : C(x, z)).$$
+Equivalently, show that there are two properties $A_{1}$, $A_{2}$ in NP such that $A(x)$
+holds exactly if $A_{1}(x)$ is true but $A_{2}(x)$ is false. Thus $A$ can be thought
+of as the difference between two NP properties, and the class of such properties
+is called DP. Now show that $$ DP \subseteq \sum_{2} P \cap  \prod_{2} P $$
+and give same intuition for why this inclusion should be proper.
+
+\vspace{6pt}
+
+\textbf{2 Mate in $k$} Argue that "mate in $k$ moves" problems in Generalized Chess
+are in $\sum_{k} P$ even on a borad of exponential size, as long as there are only
+a polynomial number of pieces. Hint: you just need to check that the moves can be
+described with a polynomial number of bits, and that we can check in polynomial
+time, given the position and the sequence of moves, whether White has won.
+
+\vspace{6pt}
+
+\textbf{3 Constructible time} Prove tha the function $f(n) = 2^{n}$ is time constructible.
+Prove also that if $f(n)$ and $g(n)$ are time constructible, then so are $f(n) + g(n)$,
+$f(n) \times g(n)$, and $f(g(n))$, where for the last one we assume that $f(n) \geq n$.
+
+\vspace{6pt}
+
+\textbf{4 the oracle says yes or on} Let's explore the class $P^{NP}$ in more detall.
+First, show that $P^{NP}$ contains both NP and coNP. then, show that
+$P^{NP} \subseteq \sum_{2} P \cap  \prod_{2} P$ and also that $NP^{NP}= \prod_{2}P$.
+Hint: let $\prod$ be the polynomial-time program that makes calls to the NP oracle.
+An input $x$ is a yes-instance if there is a run of $\prod$ which returns "yes"
+which receives "yes" and "no" answers from the oracle for some NP-complete.
+
+\subsection{解难题新思路}
+\textbf{1} Construct, for any positive integer $n$, a graph $G_{n}$, such that the
+optimal vertex cover has the cardinality $n$ and the algorithm VCA can computer a vertex
+cover of the cardinality $2n$.
+
+\vspace{6pt}
+
+\textbf{2} Find, for any positive integer $n \geq 3$, a weight function $c_{n}$
+for the complete graph $K_{n}$ of $n$ vertices, such that there exists at least two
+different weights on the edges of $K_{n}$ and the algorithm SB always computes an
+optimal solution.
+
+\vspace{6pt}
+
+\textbf{3} Let $H$ be Hamiltonian tour in a graph $G$. Remove three edges $\{ a, b \}$,
+$\{c, d\}$ and $\{e, f\}$ such that $\left |  \{ a, b, c, d, e, f\}\right | = 6$ and
+$H$ visits these 6 vertices in the order $a, b, c, d, e, f$. Draw all possible triples
+of edges whose addition to $H$ results again in a Hamiltonian tour. How many possibilities
+are there, if $k$ edges foming a matching are removed for $k \geq 3$?
+
+\vspace{6pt}
+\textbf{4} Prove that LS-CUT is a polynomial-time algorithm.
+
+\subsection{应用视角下的树结构}
+\textbf{1} 假设输入一个所有元素均不同的序列,其元素取自全序集,设计算法找出序列中第二大的
+元素,并分析其时间代价。
+
+\vspace{6pt}
+
+\textbf{2} Describe a modified version of the B-tree instance algorithm so that
+each time we creat an overflow because of a split of a node $v$, we redistribute
+keys among all of $v$'s siblings, so that each siblings holds roughly the same number
+of keys (possibly cascading the split up to the parent of $v$).
+
+\vspace{6pt}
+\textbf{3} 写一个算法，在 R-树中加入一个矩形，可能需要分隔节点。讨论预期的代价。
+
+\subsection{网络流经典算法拓展}
+\subsection{Steiner树-限制解空间}
+\subsection{调度问题}
+\subsection{结果质量有保证的近似算法}
+\subsection{ }
+\subsection{随机算法的基本概念}
+\subsection{随机舍入}
+\textbf{1} Prove that there is also a deterministic 0.5-approximation algorithm for
+the MAXCUT problem.
+
+\vspace{6pt}
+
+\textbf{2} Prove that there is 0.5(1+1/$m$)-approximation algorithm (randomized or
+deterministic) for the MAXCUT problem, where $m$ is the number of edges of the given
+graph $G$.
+
+\subsection{bin packing问题}
+\subsection{受限最短路径问题}
+\subsection{几何搜索问题}
+\subsection{property testing}
+\end{document}
