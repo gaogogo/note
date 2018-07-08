@@ -14,10 +14,10 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
     {
         m = nums2Size;
         A = nums2;
-        B = nums2;
+        B = nums1;
     }
 
-    for(is = 0, ie = m; is <= ie;)
+    for(is = 0, ie = m; ; )
     {
         i = (is + ie)/2;
         j = (nums1Size + nums2Size + 1)/2 - i;
@@ -34,13 +34,19 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
             continue;
         }
 
+        if(i==0 && A[i] >= B[j-1])
+            break;
+
+        if(i==m && A[i-1] <= B[j])
+            break;
+
         if(A[i-1] <= B[j] && A[i] >= B[j-1])
             break;
     }
     if(i==0)
         leftmax = B[j-1];
     else if(j==0)
-        leftmax = A[j-1];
+        leftmax = A[i-1];
     else
         leftmax = A[i-1] > B[j-1] ? A[i-1] : B[j-1];
 
@@ -59,10 +65,10 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
 
 int main()
 {
-    int nums1[2] = {1,3};
-    int nums2[1] = {2};
+    int nums1[1] = {100001};
+    int nums2[1] = {100000};
 
-    double r = findMedianSortedArrays(nums1, 2, nums2, 1);
+    double r = findMedianSortedArrays(nums1, 1, nums2, 1);
 
     return 0;
 }
